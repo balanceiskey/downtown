@@ -1,0 +1,22 @@
+{
+	"manifest_version": 2,
+	"name": "DiningIn Enhancments",
+	"version": "1.0.0",
+	"permissions": [
+		"storage",
+		"*://*.diningin.com/*",
+		"*://diningin.com/*"
+	],
+	"content_scripts": [
+		{
+			"matches": [
+				"*://*.diningin.com/*",
+				"*://diningin.com/*"
+			],
+			"js": [
+				"jquery.js",
+				"diningin.js"
+			]
+		}
+	]
+}
