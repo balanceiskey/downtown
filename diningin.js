@@ -1,15 +1,21 @@
 /**
-	Jonathan Stassen - March 2015
-	Feature requests, send a HipChat or Email
-	A quick <$11 row highlighter for DiningIn.com
+	Jonathan Stassen - June 2015
+	https://github.com/TheBox193/diningin-enhancements
+	Feature requests: send a Slack, Email, or PR
+	A quick set of enhancmetns to dingingin.com
 	Eat it up!
 **/
+
+// var TAX = 0.1248;
+var TAX = 0.105;
+var options;
 
 function menuHighlight() {
 	$(".menu-item").each(function(){
 		var t=$(this).closest("tr"),
-		e=t.find(".ItemCost").text().replace(/[^0-9\.]+/g,"");
-		if( Number(e*1.105).toFixed(2) <= 11 )
+		price = getPriceByEl( t ),
+		priceWithTax = Number( price * ( 1 + TAX ) ).toFixed(2);
+		if( priceWithTax <= ( Number(options.doHighlightUnderValue) || 11 ) )
 			t.css("background-color","lightblue");
 	});
 }
@@ -19,7 +25,7 @@ function fixCheckout() {
 	if(chekcoutButton && chekcoutButton !== "/checkout") {
 		chekcoutButton.href = "/checkout";
 	}
-};
+}
 
 function getLoved() {
 	var loved = [];
@@ -35,6 +41,14 @@ function setLoved(id) {
 		.prepend('<span style="position: absolute; left: -4px;">❤️</span>');
 }
 
+function getPriceByEl(el) {
+	return el.find(".ItemCost").text().replace(/[^0-9\.]+/g,"");
+}
+
+function getPriceById(id) {
+	return getPriceByEl( getMenuItemElById(id) );
+}
+
 function getMenuItemElById(id) {
 	return $('#'+id).closest("tr");
 }
@@ -43,17 +57,31 @@ function showLoved() {
 	var loved = getLoved();
 	$.each(loved, function(index, id) {
 		setLoved(id);
-	})
+	});
 }
+
+chrome.storage.sync.get({
+	doHighlightUnder: true,
+	doHighlightUnderValue: 11,
+	doShowHearts: true,
+	doSkipDrinks: true
+}, function(items) {
+	options = items;
+	$(function() {
+		setup();
+	});
+});
 
 function setup() {
-	menuHighlight();
-	showLoved();
+	if (options.doHighlightUnder) {
+		menuHighlight();
+	}
 
-	// meh
-	window.setInterval(fixCheckout, 250);
+	if (options.doShowHearts) {
+		showLoved();
+	}
+
+	if (options.doSkipDrinks) {
+		window.setInterval(fixCheckout, 250);
+	}
 }
-
-$(function() {
-	setup();
-});
