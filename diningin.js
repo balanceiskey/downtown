@@ -64,7 +64,8 @@ chrome.storage.sync.get({
 	doHighlightUnder: true,
 	doHighlightUnderValue: 11,
 	doShowHearts: true,
-	doSkipDrinks: true
+	doSkipDrinks: true,
+	doRemoveBackground: false
 }, function(items) {
 	options = items;
 	$(function() {
@@ -73,6 +74,10 @@ chrome.storage.sync.get({
 });
 
 function setup() {
+	if (options.doRemoveBackground) {
+		document.body.style.background = 'white';
+	}
+
 	if (options.doHighlightUnder) {
 		menuHighlight();
 	}

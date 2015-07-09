@@ -4,12 +4,14 @@ function save_options() {
   var doHighlightUnderValue = document.getElementById('doHighlightUnderValue').value;
   var doShowHearts = document.getElementById('doShowHearts').checked;
   var doSkipDrinks = document.getElementById('doSkipDrinks').checked;
+  var doRemoveBackground = document.getElementById('doRemoveBackground').checked;
 
   chrome.storage.sync.set({
     doHighlightUnder: doHighlightUnder,
     doHighlightUnderValue: doHighlightUnderValue,
     doShowHearts: doShowHearts,
-    doSkipDrinks: doSkipDrinks
+    doSkipDrinks: doSkipDrinks,
+    doRemoveBackground: doRemoveBackground
   }, function() {
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
@@ -28,12 +30,14 @@ function restore_options() {
     doHighlightUnder: true,
     doHighlightUnderValue: 11,
     doShowHearts: true,
-    doSkipDrinks: true
+    doSkipDrinks: true,
+    doRemoveBackground: false
   }, function(items) {
     document.getElementById('doHighlightUnder').checked = items.doHighlightUnder;
     document.getElementById('doHighlightUnderValue').value = items.doHighlightUnderValue;
     document.getElementById('doShowHearts').checked = items.doShowHearts;
     document.getElementById('doSkipDrinks').checked = items.doSkipDrinks;
+    document.getElementById('doRemoveBackground').checked = items.doRemoveBackground;
   });
 }
 document.addEventListener('DOMContentLoaded', restore_options);
