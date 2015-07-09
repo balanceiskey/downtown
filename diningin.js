@@ -60,11 +60,28 @@ function showLoved() {
 	});
 }
 
+function removeExtraneousMenuSections() {
+	var elementsToRemove = [
+		".MenuList:contains('12 Cans of Diet Coke')", // Beverages
+		".MenuList:contains('Large Catering Tongs')", // Options
+		".MenuList:contains('Single Use Canned Heat')", // Service Items
+	];
+
+	elementsToRemove.map(removeElement);
+}
+
+function removeElement(el) {
+	var $el = $(el) ;
+	if ($el) {
+		$el.remove();
+	}
+}
 chrome.storage.sync.get({
 	doHighlightUnder: true,
 	doHighlightUnderValue: 11,
 	doShowHearts: true,
 	doSkipDrinks: true,
+	doRemoveExtraneousMenuSections: false,
 	doRemoveBackground: false
 }, function(items) {
 	options = items;
@@ -88,5 +105,9 @@ function setup() {
 
 	if (options.doSkipDrinks) {
 		window.setInterval(fixCheckout, 250);
+	}
+
+	if (options.doRemoveExtraneousMenuSections) {
+		removeExtraneousMenuSections();
 	}
 }

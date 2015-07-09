@@ -4,6 +4,7 @@ function save_options() {
   var doHighlightUnderValue = document.getElementById('doHighlightUnderValue').value;
   var doShowHearts = document.getElementById('doShowHearts').checked;
   var doSkipDrinks = document.getElementById('doSkipDrinks').checked;
+  var doRemoveExtraneousMenuSections = document.getElementById('doRemoveExtraneousMenuSections').checked;
   var doRemoveBackground = document.getElementById('doRemoveBackground').checked;
 
   chrome.storage.sync.set({
@@ -11,6 +12,7 @@ function save_options() {
     doHighlightUnderValue: doHighlightUnderValue,
     doShowHearts: doShowHearts,
     doSkipDrinks: doSkipDrinks,
+    doRemoveExtraneousMenuSections: doRemoveExtraneousMenuSections,
     doRemoveBackground: doRemoveBackground
   }, function() {
     // Update status to let user know options were saved.
@@ -31,12 +33,14 @@ function restore_options() {
     doHighlightUnderValue: 11,
     doShowHearts: true,
     doSkipDrinks: true,
+    doRemoveExtraneousMenuSections: false,
     doRemoveBackground: false
   }, function(items) {
     document.getElementById('doHighlightUnder').checked = items.doHighlightUnder;
     document.getElementById('doHighlightUnderValue').value = items.doHighlightUnderValue;
     document.getElementById('doShowHearts').checked = items.doShowHearts;
     document.getElementById('doSkipDrinks').checked = items.doSkipDrinks;
+    document.getElementById('doRemoveExtraneousMenuSections').checked = items.doRemoveExtraneousMenuSections;
     document.getElementById('doRemoveBackground').checked = items.doRemoveBackground;
   });
 }
