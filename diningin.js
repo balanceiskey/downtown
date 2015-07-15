@@ -60,6 +60,49 @@ function showLoved() {
 	});
 }
 
+function removeExtraneousElements() {
+	var elementsToRemove = [
+		/** Calendar */
+		"#spnAddressInfo", // address
+		"#MPSContent > #tabnav", // tabs
+		"#mps_time_header_container", // delivery time
+
+		/** Cart */
+		"#ctl00_pageContentPlaceholder_cart_pnlTimeCart1", // delivery time
+		"#menu_delivery_address", // address
+
+		/** Menu */
+		"#ctl00_pageContentPlaceholder_CRestaurantTopBar_imgIsPremier", // premier badge
+		"#DIVAlertNote", // food alergies
+		"#spnCategoryDDL", // catagory label
+		// "#MenuPageMenu li:contains('ZAGAT')", // Zagat
+		// "#MenuPageMenu li:contains('TIMES')", // Restraunt Times
+		"#RestMenu td:contains('no prices')", // no prices pdf
+
+
+		/** Checkout */
+		"#payment_info_title_container", // label
+		".tip_container", // tip
+		"#pnlStepTipsCoupons .clear", // paddings
+		"#menu_your_order_delivery_time", // delivery time
+		".phone_number_email_container_item2 .email-receipts-message", // going green
+		".checkout_left_container_mid_payment_method #menu_delivery_time", // delivery time
+		".checkout_left_container_mid_payment_method #menu_delivery_loc", // delivery location
+		".checkout_left_container_mid_payment_method .delivery_instructions_for_driver_container:first", // number of people
+		".checkout_left_container_mid_payment_method #select_payment_method_container:contains('following options')", // number of people
+		"#divPaymentContainer span:contains('is this')", // 'what is this'
+		"#CartContainer #ctl01_pnlOrderPaymentMsg", // false positive success before success checkout
+		".tip_coupon_gift_certificates_title", // delivery instructions title
+		"#pnlStepDeliveryInfo .checkout_left_container", // delivery instructions
+
+		/** Footer */
+		"#footer_container", // Footer
+		"#InnerFooter_Container", // Footer
+	];
+
+	elementsToRemove.map(removeElement);
+}
+
 function removeExtraneousMenuSections() {
 	var elementsToRemove = [
 		".MenuList:contains('12 Cans of Diet Coke')", // Beverages
@@ -81,8 +124,9 @@ chrome.storage.sync.get({
 	doHighlightUnderValue: 11,
 	doShowHearts: true,
 	doSkipDrinks: true,
+	doRemoveExtraneousElements: false,
 	doRemoveExtraneousMenuSections: false,
-	doRemoveBackground: false
+	doRemoveBackground: true
 }, function(items) {
 	options = items;
 	$(function() {
@@ -105,6 +149,10 @@ function setup() {
 
 	if (options.doSkipDrinks) {
 		window.setInterval(fixCheckout, 250);
+	}
+
+	if (options.doRemoveExtraneousElements) {
+		removeExtraneousElements();
 	}
 
 	if (options.doRemoveExtraneousMenuSections) {
