@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "DiningIn Enhancments",
-	"version": "1.4.0",
+	"version": "1.4.1",
 	"permissions": [
 		"storage",
 		"*://*.diningin.com/*",
@@ -21,7 +21,7 @@
 			],
 			"js": [
 				"jquery.js",
-				"diningin.js"
+				"/src/diningin.enhancments.min.js"
 			]
 		}
 	]
