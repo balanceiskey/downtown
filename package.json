@@ -1,0 +1,37 @@
+{
+  "name": "DiningIn-Enhancments",
+  "version": "1.4.1",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheBox193/jquery.otherdropdown.git"
+  },
+  "keywords": [
+    "other",
+    "select",
+    "dropdown",
+    "text",
+    "input",
+    "option",
+    "textbox"
+  ],
+  "author": "Jonathan Stassen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TheBox193/jquery.otherdropdown/issues"
+  },
+  "homepage": "https://github.com/TheBox193/jquery.otherdropdown#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.2.0",
+    "gulp-zip": "^3.0.2"
+  },
+  "dependencies": {
+    "jquery": "^2.1.4"
+  }
+}

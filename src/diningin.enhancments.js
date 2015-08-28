@@ -1,10 +1,11 @@
 /**
-	Jonathan Stassen - June 2015
-	https://github.com/TheBox193/diningin-enhancements
-	Feature requests: send a Slack, Email, or PR
-	A quick set of enhancmetns to dingingin.com
-	Eat it up!
-**/
+ * @license
+ * @name jquery.otherdropdown
+ * @description Feature requests: send a Slack, Email, or PR. A quick set of enhancmetns to dingingin.com Eat it up!
+ * @version 1.4.1
+ * @author Jonathan Stassen <jstassen.com>
+ * @see https://github.com/TheBox193/diningin-enhancements
+ */
 
 // var TAX = 0.1248;
 var TAX = 0.105;
