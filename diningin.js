@@ -78,6 +78,7 @@ function removeExtraneousElements() {
 		// "#MenuPageMenu li:contains('ZAGAT')", // Zagat
 		// "#MenuPageMenu li:contains('TIMES')", // Restraunt Times
 		"#RestMenu td:contains('no prices')", // no prices pdf
+		"#MostedLoved", // Most loved
 
 
 		/** Checkout */
@@ -88,12 +89,11 @@ function removeExtraneousElements() {
 		".phone_number_email_container_item2 .email-receipts-message", // going green
 		".checkout_left_container_mid_payment_method #menu_delivery_time", // delivery time
 		".checkout_left_container_mid_payment_method #menu_delivery_loc", // delivery location
-		".checkout_left_container_mid_payment_method .delivery_instructions_for_driver_container:first", // number of people
+		".checkout_left_container_mid_payment_method .delivery_instructions_for_driver_container:last", // driver instructions (optional)
 		".checkout_left_container_mid_payment_method #select_payment_method_container:contains('following options')", // number of people
 		"#divPaymentContainer span:contains('is this')", // 'what is this'
 		"#CartContainer #ctl01_pnlOrderPaymentMsg", // false positive success before success checkout
 		".tip_coupon_gift_certificates_title", // delivery instructions title
-		"#pnlStepDeliveryInfo .checkout_left_container", // delivery instructions
 
 		/** Footer */
 		"#footer_container", // Footer
