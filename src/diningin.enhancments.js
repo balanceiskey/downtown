@@ -2,7 +2,7 @@
  * @license
  * @name jquery.otherdropdown
  * @description Feature requests: send a Slack, Email, or PR. A quick set of enhancmetns to dingingin.com Eat it up!
- * @version 1.4.1
+ * @version 1.4.2
  * @author Jonathan Stassen <jstassen.com>
  * @see https://github.com/TheBox193/diningin-enhancements
  */
@@ -39,7 +39,7 @@ function getLoved() {
 function setLoved(id) {
 	getMenuItemElById(id)
 		.find('.ItemName')
-		.prepend('<span style="position: absolute; left: -4px;">❤️</span>');
+		.prepend('<span style="position: absolute; left: -4px;">❤</span>');
 }
 
 function getPriceByEl(el) {
