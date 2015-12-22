@@ -2,7 +2,7 @@
  * @license
  * @name jquery.otherdropdown
  * @description Feature requests: send a Slack, Email, or PR. A quick set of enhancmetns to dingingin.com Eat it up!
- * @version 1.4.2
+ * @version 1.4.3
  * @author Jonathan Stassen <jstassen.com>
  * @see https://github.com/TheBox193/diningin-enhancements
  */
@@ -10,15 +10,32 @@
 // var TAX = 0.1248;
 var TAX = 0.105;
 var options;
+var lastCartTotal;
 
 function menuHighlight() {
+	var highlightThresholdValue = getHighlightThresholdValue();
 	$(".menu-item").each(function(){
 		var t=$(this).closest("tr"),
 		price = getPriceByEl( t ),
 		priceWithTax = Number( price * ( 1 + TAX ) ).toFixed(2);
-		if( priceWithTax <= ( Number(options.doHighlightUnderValue) || 11 ) )
-			t.css("background-color","lightblue");
+		if( priceWithTax <= ( Number(highlightThresholdValue) || 11 ) ) {
+			t.css("background-color", "lightblue");
+		} else {
+			t.css("background-color", "white");
+		}
 	});
+}
+
+function getHighlightThresholdValue() {
+	return options.doHighlightUnderValue - getCartTotal();
+}
+
+function checkCartTotal () {
+	var cartTotal = getCartTotal();
+	if( cartTotal !== lastCartTotal ) {
+		lastCartTotal = cartTotal;
+		menuHighlight();
+	}
 }
 
 function fixCheckout() {
@@ -42,8 +59,16 @@ function setLoved(id) {
 		.prepend('<span style="position: absolute; left: -4px;">❤</span>');
 }
 
+function convertPriceStringToNumber(string) {
+	return Number( string.replace(/[^0-9\.]+/g,"") );
+}
+
 function getPriceByEl(el) {
-	return el.find(".ItemCost").text().replace(/[^0-9\.]+/g,"");
+	return convertPriceStringToNumber( el.find(".ItemCost").text() );
+}
+
+function getCartTotal() {
+	return convertPriceStringToNumber( $('.CartSubtotalLabel').text() );
 }
 
 function getPriceById(id) {
@@ -142,6 +167,7 @@ function setup() {
 
 	if (options.doHighlightUnder) {
 		menuHighlight();
+		window.setInterval(checkCartTotal, 1500);
 	}
 
 	if (options.doShowHearts) {
@@ -149,7 +175,7 @@ function setup() {
 	}
 
 	if (options.doSkipDrinks) {
-		window.setInterval(fixCheckout, 250);
+		window.setInterval(fixCheckout, 1000);
 	}
 
 	if (options.doRemoveExtraneousElements) {
