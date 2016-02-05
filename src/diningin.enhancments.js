@@ -1,8 +1,8 @@
 /**
  * @license
- * @name jquery.otherdropdown
+ * @name diningin.enhancments
  * @description Feature requests: send a Slack, Email, or PR. A quick set of enhancmetns to dingingin.com Eat it up!
- * @version 1.4.3
+ * @version 1.4.4
  * @author Jonathan Stassen <jstassen.com>
  * @see https://github.com/TheBox193/diningin-enhancements
  */
@@ -92,6 +92,7 @@ function removeExtraneousElements() {
 		"#spnAddressInfo", // address
 		"#MPSContent > #tabnav", // tabs
 		"#mps_time_header_container", // delivery time
+		".mps_calendar_container > .mps_time_header_container", // delivery time
 
 		/** Cart */
 		"#ctl00_pageContentPlaceholder_cart_pnlTimeCart1", // delivery time
@@ -103,6 +104,7 @@ function removeExtraneousElements() {
 		"#spnCategoryDDL", // catagory label
 		// "#MenuPageMenu li:contains('ZAGAT')", // Zagat
 		// "#MenuPageMenu li:contains('TIMES')", // Restraunt Times
+		"#CartMid p:contains('item names')", // Click things to the left
 		"#RestMenu td:contains('no prices')", // no prices pdf
 		"#MostedLoved", // Most loved
 
@@ -110,8 +112,10 @@ function removeExtraneousElements() {
 		/** Checkout */
 		"#payment_info_title_container", // label
 		".tip_container", // tip
+		"#pnlStepTipsCoupons > #order_total_container", // redundent total
 		"#pnlStepTipsCoupons .clear", // paddings
 		"#menu_your_order_delivery_time", // delivery time
+		"#pnlBillingcode #lblBillingCode", // billing (optional)
 		".phone_number_email_container_item2 .email-receipts-message", // going green
 		".checkout_left_container_mid_payment_method #menu_delivery_time", // delivery time
 		".checkout_left_container_mid_payment_method #menu_delivery_loc", // delivery location
@@ -119,7 +123,14 @@ function removeExtraneousElements() {
 		".checkout_left_container_mid_payment_method #select_payment_method_container:contains('following options')", // number of people
 		"#divPaymentContainer span:contains('is this')", // 'what is this'
 		"#CartContainer #ctl01_pnlOrderPaymentMsg", // false positive success before success checkout
+		"#ctl01_pnlOrderPaymentMsg > .Default_message_box", // false positive success before success checkout
 		".tip_coupon_gift_certificates_title", // delivery instructions title
+		"#order_total_below_container", // redundent total
+		".menu_your_order_container_top", // We alread know this is "our order"
+		"#complete_process_my_order_container > #change_my_order_container", // Duplicate offer to change order
+
+		".checkout_left_container_top", // border
+		".checkout_left_container_bottom", // border
 
 		/** Footer */
 		"#footer_container", // Footer
@@ -127,6 +138,8 @@ function removeExtraneousElements() {
 	];
 
 	elementsToRemove.map(removeElement);
+
+	$('.checkout_left_container_mid_payment_method, .checkout_left_container_mid').css({'border': 'none' });
 }
 
 function removeExtraneousMenuSections() {
