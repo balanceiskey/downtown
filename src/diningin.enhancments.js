@@ -152,12 +152,47 @@ function removeExtraneousMenuSections() {
 	elementsToRemove.map(removeElement);
 }
 
+function gfRestaurants() {
+	var gf = {
+		1100807: 'Doc B’s',
+		1329: 'CPK',
+		1100769: 'Slurping Turtle',
+		1101877: 'Gaudi Café',
+		1100679: 'Freshii',
+		1100320: 'Rosebud Express',
+		1100193: 'Goddess & Grocer',
+		1100251: 'Meli Café',
+		1100759: 'Meli Café',
+		1002: 'Big Bowl',
+		1100279: 'Beer Bistro',
+		1194: 'Portillo’s',
+		1100511: 'Jersey Mikes',
+		1443: 'Tiparos',
+		1101878: 'Costa Vida',
+		1100183: 'PF Chang',
+		1100167: 'Wildfire'
+	};
+	var gfIDs = Object.keys(gf);
+	var rest = $('.mps_grid_table .actionItem');
+
+	rest.each( function(index, item) {
+		$item = $(item);
+		var data = $item.children('.rdata');
+		gfIDs.forEach( function(item) {
+			if( data.text().search(item) >0 ) {
+				$item.append('<br><span style="color: #7FA64F;">(gf)<span>');
+			}
+		});
+	});
+}
+
 function removeElement(el) {
 	var $el = $(el) ;
 	if ($el) {
 		$el.remove();
 	}
 }
+
 chrome.storage.sync.get({
 	doHighlightUnder: true,
 	doHighlightUnderValue: 11,
@@ -165,7 +200,8 @@ chrome.storage.sync.get({
 	doSkipDrinks: true,
 	doRemoveExtraneousElements: false,
 	doRemoveExtraneousMenuSections: false,
-	doRemoveBackground: true
+	doRemoveBackground: true,
+	doGfRestaurants: true
 }, function(items) {
 	options = items;
 	$(function() {
@@ -174,6 +210,7 @@ chrome.storage.sync.get({
 });
 
 function setup() {
+
 	if (options.doRemoveBackground) {
 		document.body.style.background = 'white';
 	}
@@ -197,5 +234,9 @@ function setup() {
 
 	if (options.doRemoveExtraneousMenuSections) {
 		removeExtraneousMenuSections();
+	}
+
+	if (options.doGfRestaurants) {
+		gfRestaurants();
 	}
 }

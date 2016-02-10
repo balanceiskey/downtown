@@ -5,7 +5,8 @@ var options = {
   doSkipDrinks: true,
   doRemoveExtraneousElements: false,
   doRemoveExtraneousMenuSections: false,
-  doRemoveBackground: true
+  doRemoveBackground: true,
+  doGfRestaurants: true
 };
 
 	// Saves options to chrome.storage
@@ -18,7 +19,8 @@ function save_options() {
     doSkipDrinks: document.getElementById('doSkipDrinks').checked,
     doRemoveExtraneousElements: document.getElementById('doRemoveExtraneousElements').checked,
     doRemoveExtraneousMenuSections: document.getElementById('doRemoveExtraneousMenuSections').checked,
-    doRemoveBackground: document.getElementById('doRemoveBackground').checked
+    doRemoveBackground: document.getElementById('doRemoveBackground').checked,
+    doGfRestaurants: document.getElementById('doGfRestaurants').checked
   }, function() {
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
@@ -41,6 +43,7 @@ function restore_options() {
     document.getElementById('doRemoveExtraneousElements').checked = items.doRemoveExtraneousElements;
     document.getElementById('doRemoveExtraneousMenuSections').checked = items.doRemoveExtraneousMenuSections;
     document.getElementById('doRemoveBackground').checked = items.doRemoveBackground;
+    document.getElementById('doGfRestaurants').checked = items.doGfRestaurants;
   });
 }
 document.addEventListener('DOMContentLoaded', restore_options);
