@@ -1,8 +1,8 @@
 /**
  * @license
  * @name diningin.enhancments
- * @description Feature requests: send a Slack, Email, or PR. A quick set of enhancmetns to dingingin.com Eat it up!
- * @version 1.4.4
+ * @description A quick set of enhancmetns to dingingin.com Eat it up!
+ * @version 1.5.0
  * @author Jonathan Stassen <jstassen.com>
  * @see https://github.com/TheBox193/diningin-enhancements
  */
@@ -153,26 +153,26 @@ function removeExtraneousMenuSections() {
 }
 
 function gfRestaurants() {
-	var gf = {
-		1100807: 'Doc B’s',
-		1329: 'CPK',
-		1100769: 'Slurping Turtle',
-		1101877: 'Gaudi Café',
-		1100679: 'Freshii',
-		1100320: 'Rosebud Express',
-		1100193: 'Goddess & Grocer',
-		1100251: 'Meli Café',
-		1100759: 'Meli Café',
-		1002: 'Big Bowl',
-		1100279: 'Beer Bistro',
-		1194: 'Portillo’s',
-		1100511: 'Jersey Mikes',
-		1443: 'Tiparos',
-		1101878: 'Costa Vida',
-		1100183: 'PF Chang',
-		1100167: 'Wildfire'
-	};
-	var gfIDs = Object.keys(gf);
+	var gfIDs = [
+		1100807, // Doc B’s
+		1329, // CPK
+		1100769, // Slurping Turtle
+		1101877, // Gaudi Café
+		1100679, // Freshii
+		1100320, // Rosebud Express
+		1100193, // Goddess & Grocer
+		1100251, // Meli Café
+		1100759, // Meli Café
+		1002, // Big Bowl
+		1100279, // Beer Bistro
+		1194, // Portillo’s
+		1100511, // Jersey Mikes
+		1443, // Tiparos
+		1101878, // Costa Vida
+		1100183, // PF Chang
+		1100167 // Wildfir
+	];
+
 	var rest = $('.mps_grid_table .actionItem');
 
 	rest.each( function(index, item) {

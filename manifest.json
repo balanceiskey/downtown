@@ -21,7 +21,7 @@
 			],
 			"js": [
 				"jquery.js",
-				"/src/diningin.enhancments.js"
+				"/src/diningin.enhancments.min.js"
 			]
 		}
 	]
