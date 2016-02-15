@@ -2,7 +2,7 @@
  * @license
  * @name diningin.enhancments
  * @description A quick set of enhancmetns to dingingin.com Eat it up!
- * @version 1.5.1
+ * @version 1.5.2
  * @author Jonathan Stassen <jstassen.com>
  * @see https://github.com/TheBox193/diningin-enhancements
  */
@@ -179,7 +179,7 @@ function gfRestaurants() {
 		$item = $(item);
 		var data = $item.children('.rdata');
 		gfIDs.forEach( function(item) {
-			if( data.text().search(item) >0 ) {
+			if( data.text().search(" " + item) >0 ) {
 				$item.append('<br><span style="color: #7FA64F;">(gf)<span>');
 			}
 		});
