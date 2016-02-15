@@ -2,7 +2,7 @@
  * @license
  * @name diningin.enhancments
  * @description A quick set of enhancmetns to dingingin.com Eat it up!
- * @version 1.5.0
+ * @version 1.5.1
  * @author Jonathan Stassen <jstassen.com>
  * @see https://github.com/TheBox193/diningin-enhancements
  */
@@ -162,7 +162,7 @@ function gfRestaurants() {
 		1100320, // Rosebud Express
 		1100193, // Goddess & Grocer
 		1100251, // Meli Café
-		1100759, // Meli Café
+		// 1100759, // Meli Café // Removed, the other one seems the be the right one
 		1002, // Big Bowl
 		1100279, // Beer Bistro
 		1194, // Portillo’s
