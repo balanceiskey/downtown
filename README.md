@@ -1,5 +1,5 @@
-# diningin-enhancements
-Fix up Diningin with a few enhancements. 
+# diningin-tweaks
+Fix up Diningin with a few tweaks. 
 
 # Install
 Install on Chrome Webstore:
