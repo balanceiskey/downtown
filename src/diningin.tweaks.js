@@ -2,13 +2,13 @@
  * @license
  * @name diningin.enhancments
  * @description A quick set of enhancmetns to dingingin.com Eat it up!
- * @version 1.5.2
+ * @version 1.5.4
  * @author Jonathan Stassen <jstassen.com>
  * @see https://github.com/TheBox193/diningin-enhancements
  */
 
 // var TAX = 0.1248;
-var TAX = 0.105;
+var TAX = 0.115;
 var options;
 var lastCartTotal;
 
