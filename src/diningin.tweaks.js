@@ -2,7 +2,7 @@
  * @license
  * @name diningin.enhancments
  * @description A quick set of enhancmetns to dingingin.com Eat it up!
- * @version 1.5.4
+ * @version 1.6.0
  * @author Jonathan Stassen <jstassen.com>
  * @see https://github.com/TheBox193/diningin-enhancements
  */
@@ -11,6 +11,26 @@
 var TAX = 0.115;
 var options;
 var lastCartTotal;
+var api = 'https://jstassen-01.jstassen.com/';
+
+var route = window.location.pathname.split('/');
+var onRestrauntPage = route.indexOf('restaurant-menu') > -1;
+if (onRestrauntPage) {
+	var restaurantID = route[6];
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
+}
+
+var user = getCookie('EmailAddress');
 
 function menuHighlight() {
 	var highlightThresholdValue = getHighlightThresholdValue();
@@ -63,8 +83,16 @@ function convertPriceStringToNumber(string) {
 	return Number( string.replace(/[^0-9\.]+/g,"") );
 }
 
+function getMenuItems() {
+	return $('.tbl-MenuList > tbody > tr');
+}
+
 function getPriceByEl(el) {
 	return convertPriceStringToNumber( el.find(".ItemCost").text() );
+}
+
+function getMenuItemIdByTr(el) {
+	return $(el).find('#DIVDescription > div > div > span').attr('id');
 }
 
 function getCartTotal() {
@@ -185,6 +213,67 @@ function gfRestaurants() {
 		});
 	});
 }
+
+function getVotes() {
+	if(onRestrauntPage) {
+
+		$.get(api + 'rest/' + restaurantID).then( function(items) {
+
+			items = items.reduce(function(result, item) {
+				var resultItem = result.find(function(i) {return i.itemID == item.item});
+
+				if(!resultItem) {
+					result.push({itemID: item.item, votesup:0, votesdown:0, myVote: null, comments: []});
+					resultItem = result[result.length - 1];
+				}
+
+				if (item.vote === 'up') {
+					resultItem.votesup ++;
+				} else if (item.vote === 'down') {
+					resultItem.votesdown ++;
+				}
+
+				if (item.cmnt) {
+					resultItem.push({comment: item.cmnt, user: item.user});
+				}
+
+				if (item.user === user) {
+					resultItem.myVote = item.vote;
+				}
+
+				return result;
+			}, []);
+
+			items.forEach( function(item) {
+				var itemEl = getMenuItemElById(item.itemID);
+				itemEl.find('.votes .up .count').text( item.votesup );
+				itemEl.find('.votes .down .count').text( item.votesdown );
+				if(item.myVote) {
+					itemEl.find('.votes .'+item.myVote).css('color', 'green');
+				}
+			});
+		});
+
+	}
+}
+getMenuItems().prepend('<td class="votes" style="padding: 0 6px"><div class="up" style="cursor: pointer;"><span class="count"></span>⬆</div><div class="down" style="cursor: pointer;"><span class="count"></span>⬇</div></td>')
+getVotes();
+
+jQuery('.votes').click(function(ev) {
+	var vote = ev.target.className;
+	var itemID = getMenuItemIdByTr( ev.currentTarget.parentElement );
+	restaurantID;
+	user;
+
+	if (vote !== 'up' && vote !== 'down') {
+		return;
+	}
+
+	var payload = {user: user, rest: restaurantID, item: itemID, vote: vote};
+
+	$.post(api + 'item/new', payload);
+	location.reload();
+});
 
 function removeElement(el) {
 	var $el = $(el) ;
