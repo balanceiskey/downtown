@@ -2,7 +2,7 @@
  * @license
  * @name diningin.enhancments
  * @description A quick set of enhancmetns to dingingin.com Eat it up!
- * @version 1.6.0
+ * @version 1.6.1
  * @author Jonathan Stassen <jstassen.com>
  * @see https://github.com/TheBox193/diningin-enhancements
  */
@@ -261,12 +261,16 @@ getVotes();
 
 jQuery('.votes').click(function(ev) {
 	var vote = ev.target.className;
-	var itemID = getMenuItemIdByTr( ev.currentTarget.parentElement );
-	restaurantID;
-	user;
+	var tr = ev.currentTarget.parentElement;
+	var itemID = getMenuItemIdByTr( tr );
+	var isUnvote = $( tr ).find('.votes .' + vote).css('color') === "rgb(0, 128, 0)";
 
 	if (vote !== 'up' && vote !== 'down') {
 		return;
+	}
+
+	if ( isUnvote ) {
+		vote = "none";
 	}
 
 	var payload = {user: user, rest: restaurantID, item: itemID, vote: vote};
