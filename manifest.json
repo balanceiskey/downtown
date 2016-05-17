@@ -1,13 +1,11 @@
 {
 	"manifest_version": 2,
 	"name": "DiningIn Tweaks",
-	"version": "1.6.1",
+	"version": "1.6.2",
 	"permissions": [
 		"storage",
 		"*://*.diningin.com/*",
-		"*://diningin.com/*",
-		"http://jstassen-01.jstassen.com/",
-		"http://*/*"
+		"*://diningin.com/*"
 	],
 	"options_page": "options.html",
 	"options_ui": {
