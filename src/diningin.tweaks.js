@@ -15,6 +15,7 @@ var api = 'https://jstassen-01.jstassen.com/';
 
 var route = window.location.pathname.split('/');
 var onRestrauntPage = route.indexOf('restaurant-menu') > -1;
+var onRestrauntGrid = route.indexOf('prix-fixe') > -1 && route.length === 2;
 if (onRestrauntPage) {
 	var restaurantID = route[6];
 }
@@ -203,12 +204,21 @@ function gfRestaurants() {
 
 	var rest = $('.mps_grid_table .actionItem');
 
-	rest.each( function(index, item) {
-		$item = $(item);
-		var data = $item.children('.rdata');
-		gfIDs.forEach( function(item) {
-			if( data.text().search(" " + item) >0 ) {
-				$item.append('<br><span style="color: #7FA64F;">(gf)<span>');
+	$.get(api + 'averages/').then( function(restaurantsTimes) {
+
+		rest.each( function(index, item) {
+			$item = $(item);
+			var data = $item.children('.rdata').text();
+			var data2 = JSON.parse(data.replace(/(['"])?([a-zA-Z0-9_]+)(['"])?:/g, '"$2": '));
+			gfIDs.forEach( function(id) {
+				if( data.search(" " + id) >0 ) {
+					$item.append('<br><span style="color: #7FA64F;">(gf)<span>');
+				}
+			});
+
+			var time = restaurantsTimes[data2.rl];
+			if (time) {
+				$item.append('<br><span>' + time.substring(0,5) + '<span>');
 			}
 		});
 	});
