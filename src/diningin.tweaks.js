@@ -15,6 +15,7 @@ var api = 'https://jstassen-01.jstassen.com/';
 
 var route = window.location.pathname.split('/');
 var onRestrauntPage = route.indexOf('restaurant-menu') > -1;
+var onRestrauntGrid = route.indexOf('prix-fixe') > -1 && route.length === 2;
 if (onRestrauntPage) {
 	var restaurantID = route[6];
 }
@@ -205,10 +206,30 @@ function gfRestaurants() {
 
 	rest.each( function(index, item) {
 		$item = $(item);
-		var data = $item.children('.rdata');
-		gfIDs.forEach( function(item) {
-			if( data.text().search(" " + item) >0 ) {
+		var data = $item.children('.rdata').text();
+		gfIDs.forEach( function(id) {
+			if( data.search(" " + id) >0 ) {
 				$item.append('<br><span style="color: #7FA64F;">(gf)<span>');
+			}
+		});
+	});
+}
+
+function averageDeliveryTimes() {
+	var rest = $('.mps_grid_table .actionItem');
+
+	$.get(api + 'averages/').then( function(restaurantsTimes) {
+		rest.each( function(index, item) {
+			$item = $(item);
+			var data = $item.children('.rdata').text();
+			var data2 = JSON.parse(data.replace(/(['"])?([a-zA-Z0-9_]+)(['"])?:/g, '"$2": '));
+
+			var time = restaurantsTimes[data2.rl];
+			if (time) {
+				var timeDisplay = $('<div>' + time.substring(0,5) + '<div>')
+					.css('padding-top', '15px')
+					.css('font-size', 15);
+				$item.append(timeDisplay);
 			}
 		});
 	});
@@ -294,7 +315,8 @@ chrome.storage.sync.get({
 	doRemoveExtraneousElements: false,
 	doRemoveExtraneousMenuSections: false,
 	doRemoveBackground: true,
-	doGfRestaurants: true
+	doGfRestaurants: true,
+	doAverageDeliveryTimes: true,
 }, function(items) {
 	options = items;
 	$(function() {
@@ -331,5 +353,9 @@ function setup() {
 
 	if (options.doGfRestaurants) {
 		gfRestaurants();
+	}
+
+	if (options.doAverageDeliveryTimes) {
+		averageDeliveryTimes();
 	}
 }

@@ -6,7 +6,8 @@ var options = {
   doRemoveExtraneousElements: false,
   doRemoveExtraneousMenuSections: false,
   doRemoveBackground: true,
-  doGfRestaurants: true
+  doGfRestaurants: true,
+  doAverageDeliveryTimes: true,
 };
 
 	// Saves options to chrome.storage
@@ -20,7 +21,8 @@ function save_options() {
     doRemoveExtraneousElements: document.getElementById('doRemoveExtraneousElements').checked,
     doRemoveExtraneousMenuSections: document.getElementById('doRemoveExtraneousMenuSections').checked,
     doRemoveBackground: document.getElementById('doRemoveBackground').checked,
-    doGfRestaurants: document.getElementById('doGfRestaurants').checked
+    doGfRestaurants: document.getElementById('doGfRestaurants').checked,
+    doAverageDeliveryTimes: document.getElementById('doAverageDeliveryTimes').checked,
   }, function() {
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
@@ -44,6 +46,7 @@ function restore_options() {
     document.getElementById('doRemoveExtraneousMenuSections').checked = items.doRemoveExtraneousMenuSections;
     document.getElementById('doRemoveBackground').checked = items.doRemoveBackground;
     document.getElementById('doGfRestaurants').checked = items.doGfRestaurants;
+    document.getElementById('doAverageDeliveryTimes').checked = items.doAverageDeliveryTimes;
   });
 }
 document.addEventListener('DOMContentLoaded', restore_options);
