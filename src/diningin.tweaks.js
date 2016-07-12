@@ -2,7 +2,7 @@
  * @license
  * @name diningin.tweaks
  * @description A quick set of tweaks to dingingin.com Eat it up!
- * @version 1.6.3
+ * @version 1.7.0
  * @author Jonathan Stassen <jstassen.com>
  * @see https://github.com/TheBox193/diningin-enhancements
  */
