@@ -226,8 +226,16 @@ function averageDeliveryTimes() {
 
 			var time = restaurantsTimes[data2.rl];
 			if (time) {
-				var timeDisplay = $('<div>' + time.substring(0,5) + '<div>')
-					.css('padding-top', '15px')
+				var timeLabel = $('<div>Average Time:</div>')
+					.css('margin-top', '8px')
+					.css('border-top', '1px solid lightgray')
+					.css('padding-top', '8px')
+					.css('font-size', 12);
+				$item.append(timeLabel);
+				
+				var timeString = time.split(":").slice(0,2).join(":");
+				var timeDisplay = $('<div>' + timeString + '<div>')
+					.css('padding-top', '5px')
 					.css('font-size', 15);
 				$item.append(timeDisplay);
 			}
