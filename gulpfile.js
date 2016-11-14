@@ -4,7 +4,7 @@ var rename = require('gulp-rename');
 var zip = require('gulp-zip');
 
 gulp.task('default', function() {
-	gulp.src('src/diningin.tweaks.js')
+	gulp.src('src/jira.tweaks.js')
 	.pipe(uglify({preserveComments: "some"}))
 	.pipe(rename({
 		suffix: '.min'
@@ -12,6 +12,6 @@ gulp.task('default', function() {
 	.pipe(gulp.dest('src'));
 
 	return gulp.src(['**', '!./node_modules/', '!./node_modules/**', '!./dist/', '!./dist/**'])
-    .pipe(zip('diningin.tweaks.zip'))
+    .pipe(zip('jira.tweaks.zip'))
 	.pipe(gulp.dest('dist'));
 });

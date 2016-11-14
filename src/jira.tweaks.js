@@ -1,10 +1,10 @@
 /**
  * @license
  * @name jira.enhancements
- * @description Making Jira suck less
+ * @description Making Jira better
  * @version 0.0.1
  * @author Matt Conzen <mattconzen.com>
- * @see https://github.com/TheBox193/diningin-enhancements
+ * @see https://github.com/mattconzen/jira-enhancements
  */
 
  var QA_COLUMN_ID = 498;
@@ -13,8 +13,9 @@
 var options;
 var route = window.location.pathname.split('/');
 
-var onDetailView = route.indexOf('sprout.atlassian.net/browse/') > -1;
-var onBambuBoard = route.indexOf('sprout.atlassian.net/RapidBoard.jspa?rapidView=56') > -1;
+// var onDetailView = route.indexOf('sprout.atlassian.net/browse/') > -1;
+var onBambuBoard = route.indexOf('RapidBoard.jspa?rapidView=56') > -1;
+console.log("i loaded");
 
 // function getCookie(cname) {
 //     var name = cname + "=";
@@ -28,6 +29,10 @@ var onBambuBoard = route.indexOf('sprout.atlassian.net/RapidBoard.jspa?rapidView
 // }
 //
 // var user = getCookie('EmailAddress');
+
+function getElementsInColumn(columnId) {
+    return $( "li[data-column-id=" + columnId + "] ");
+}
 
 function hideElement(el) {
 	var $el = $(el) ;
@@ -46,8 +51,8 @@ chrome.storage.sync.get({
 });
 
 function setup() {
-  if (true) {
-    alert('Omg');
+  if (options.doCollapseSubtasksinQAorBV) {
+    console.log("hiding elements");
+    getElementsInColumn(498).map(hideElement);
   }
-
 }

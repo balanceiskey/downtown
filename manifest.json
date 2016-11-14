@@ -5,8 +5,7 @@
 	"permissions": [
 		"storage",
 		"background",
-		"*://sprout.atlassian.com/*",
-		"http://*/*"
+		"*://sprout.atlassian.net/*"
 	],
 	"options_page": "options.html",
 	"options_ui": {
@@ -17,7 +16,7 @@
 	"content_scripts": [
 		{
 			"matches": [
-				"*://sprout.atlassian.com/*"
+				"*://sprout.atlassian.net/*"
 			],
 			"js": [
 				"jquery-3.1.1.js",
