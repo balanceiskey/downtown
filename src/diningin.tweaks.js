@@ -63,6 +63,7 @@ function fixCheckout() {
 	var chekcoutButton = $(".ibtnContinueBtnBev")[0];
 	if(chekcoutButton && chekcoutButton !== "/checkout") {
 		chekcoutButton.href = "/checkout";
+		chekcoutButton.text = 'Proceed to Payment';
 	}
 }
 
@@ -116,9 +117,13 @@ function showLoved() {
 }
 
 function removeExtraneousElements() {
-	var elementsToRemove = [
+	var elementsToHide = [
+		"#tblLiveChat", // chat
+
 		/** Calendar */
 		"#spnAddressInfo", // address
+		"#MPSContent > h1", // title
+		"#MPSContent > .Default_message_box", // greeting
 		"#MPSContent > #tabnav", // tabs
 		"#mps_time_header_container", // delivery time
 		".mps_calendar_container > .mps_time_header_container", // delivery time
@@ -162,23 +167,24 @@ function removeExtraneousElements() {
 		".checkout_left_container_bottom", // border
 
 		/** Footer */
-		"#footer_container", // Footer
+		"#footer_container", // Footer, needed for addeding credit card.
 		"#InnerFooter_Container", // Footer
 	];
 
-	elementsToRemove.map(removeElement);
+	elementsToHide.map(hideElement);
 
-	$('.checkout_left_container_mid_payment_method, .checkout_left_container_mid').css({'border': 'none' });
+	$('.checkout_left_container_mid_payment_method, .checkout_left_container_mid, .payment_method_choices_container').css({'border': 'none' });
+	$('.checkout_left_container').css('margin', 0)
 }
 
 function removeExtraneousMenuSections() {
-	var elementsToRemove = [
+	var elementsToHide = [
 		".MenuList:contains('12 Cans of Diet Coke')", // Beverages
 		".MenuList:contains('Large Catering Tongs')", // Options
 		".MenuList:contains('Single Use Canned Heat')", // Service Items
 	];
 
-	elementsToRemove.map(removeElement);
+	elementsToHide.map(hideElement);
 }
 
 function gfRestaurants() {
@@ -228,15 +234,13 @@ function averageDeliveryTimes() {
 			if (time) {
 				var timeLabel = $('<div>Average Time:</div>')
 					.css('margin-top', '8px')
-					.css('border-top', '1px solid lightgray')
 					.css('padding-top', '8px')
 					.css('font-size', 12);
 				$item.append(timeLabel);
 				
 				var timeString = time.split(":").slice(0,2).join(":");
 				var timeDisplay = $('<div>' + timeString + '<div>')
-					.css('padding-top', '5px')
-					.css('font-size', 15);
+					.css('padding-top', '5px');
 				$item.append(timeDisplay);
 			}
 		});
@@ -308,10 +312,10 @@ jQuery('.votes').click(function(ev) {
 	location.reload();
 });
 
-function removeElement(el) {
+function hideElement(el) {
 	var $el = $(el) ;
 	if ($el) {
-		$el.remove();
+		$el.hide();
 	}
 }
 
