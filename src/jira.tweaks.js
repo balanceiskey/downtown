@@ -1,24 +1,17 @@
 /**
  * @license
- * @name diningin.tweaks
- * @description A quick set of tweaks to dingingin.com Eat it up!
- * @version 1.7.2
- * @author Jonathan Stassen <jstassen.com>
+ * @name jira.enhancements
+ * @description Making Jira suck less
+ * @version 0.0.1
+ * @author Matt Conzen <mattconzen.com>
  * @see https://github.com/TheBox193/diningin-enhancements
  */
 
-// var TAX = 0.1248;
-var TAX = 0.115;
 var options;
-var lastCartTotal;
-var api = 'https://jstassen-01.jstassen.com/';
-
 var route = window.location.pathname.split('/');
-var onRestrauntPage = route.indexOf('restaurant-menu') > -1;
-var onRestrauntGrid = route.indexOf('prix-fixe') > -1 && route.length === 2;
-if (onRestrauntPage) {
-	var restaurantID = route[6];
-}
+
+var
+var onBambuBoard = route.indexOf('RapidBoard.jspa?rapidView=56') > -1;
 
 function getCookie(cname) {
     var name = cname + "=";
@@ -32,6 +25,8 @@ function getCookie(cname) {
 }
 
 var user = getCookie('EmailAddress');
+var QA_COLUMN_ID = 498;
+var BV_COLUMN_ID = 503;
 
 function menuHighlight() {
 	var highlightThresholdValue = getHighlightThresholdValue();
@@ -237,7 +232,7 @@ function averageDeliveryTimes() {
 					.css('padding-top', '8px')
 					.css('font-size', 12);
 				$item.append(timeLabel);
-				
+
 				var timeString = time.split(":").slice(0,2).join(":");
 				var timeDisplay = $('<div>' + timeString + '<div>')
 					.css('padding-top', '5px');

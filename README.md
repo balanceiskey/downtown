@@ -1,6 +1,6 @@
-# diningin-tweaks
-Fix up Diningin with a few tweaks. 
+# jira-enhancements
+Making Jira better because Atlassian won't.
 
 # Install
 Install on Chrome Webstore:
-https://chrome.google.com/webstore/detail/diningin-enhancments/lkiekaajnilpmkppiglncmgnkjcfpmpj
+[ Link incoming ]
