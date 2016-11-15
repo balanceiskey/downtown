@@ -13,36 +13,24 @@
 var options;
 var route = window.location.pathname.split('/');
 
-// var onDetailView = route.indexOf('sprout.atlassian.net/browse/') > -1;
+var onDetailView = route.indexOf('sprout.atlassian.net/browse/') > -1;
 var onBambuBoard = route.indexOf('RapidBoard.jspa?rapidView=56') > -1;
-console.log("i loaded");
-
-// function getCookie(cname) {
-//     var name = cname + "=";
-//     var ca = document.cookie.split(';');
-//     for(var i=0; i<ca.length; i++) {
-//         var c = ca[i];
-//         while (c.charAt(0)==' ') c = c.substring(1);
-//         if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
-//     }
-//     return "";
-// }
-//
-// var user = getCookie('EmailAddress');
 
 function getElementsInColumn(columnId) {
     return $( "li[data-column-id=" + columnId + "] ");
 }
 
 function hideElement(el) {
-	var $el = $(el) ;
-	if ($el) {
-		$el.hide();
+  console.log("HideElement called.");
+	if (el) {
+    el.hide();
+    console.log("Hiding" + el);
 	}
 }
 
 chrome.storage.sync.get({
-	doCollapseSubtasksinQAorBV: true,
+	collapseSubtasksinQAorBV: true,
+  useMarkdownEditor: true
 }, function(items) {
 	options = items;
 	$(function() {
@@ -51,8 +39,12 @@ chrome.storage.sync.get({
 });
 
 function setup() {
-  if (options.doCollapseSubtasksinQAorBV) {
+  if (options.collapseSubtasksinQAorBV) {
     console.log("hiding elements");
     getElementsInColumn(498).map(hideElement);
+  }
+  if (options.useMarkdownEditor && onDetailView) {
+    console.log("Loading markdown editor");
+    loadMarkdownEditor();
   }
 }
