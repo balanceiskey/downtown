@@ -26,6 +26,9 @@
     "gulp-zip": "^3.2.0"
   },
   "dependencies": {
-    "jquery": "^3.1.1"
+    "arrive": "^2.3.1",
+    "j2m": "^1.0.0",
+    "jquery": "^3.1.1",
+    "simplemde": "^1.11.2"
   }
 }
